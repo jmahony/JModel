@@ -349,14 +349,17 @@ class Post {
 
   /**
    * Returns a set of posts, but only if the post type matches the static objects type
+   * @param  array  $args , merges with default
    * @return WP_Post but only if it is of the correct post type
    */
-  public static function getAll() {
+  public static function getAll($args = array()) {
 
-    $posts = get_posts(array(
+    $args = array_merge(array(
       'post_type'      => static::POST_TYPE,
       'posts_per_page' => -1
-    ));
+    ), $args);
+
+    $posts = get_posts();
 
     $ra = array();
 
