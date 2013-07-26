@@ -230,6 +230,10 @@ class Post {
 
   }
 
+  /**
+   * Add a new class to the post, will be appended to the WordPress get_post_class array
+   * @param string
+   */
   public function addClass($class) {
     $this->classes[] = $class;
   }
