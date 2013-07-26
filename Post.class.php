@@ -44,6 +44,11 @@ class Post {
    */
   public function __construct($post = null) {
 
+    if (!$post) {
+      global $post;
+      $post = $post;
+    }
+
     if (!$post) throw new \Exception('Post must be set');
 
     if (!($post instanceof \WP_Post)) $post = \get_post($post);
