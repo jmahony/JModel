@@ -27,6 +27,12 @@ class Post {
   protected $meta;
 
   /**
+   * Adds additional classes for the post
+   * @var array
+   */
+  private $classes = array();
+
+  /**
    * Holds the posts type
    * @const string
    */
@@ -71,7 +77,7 @@ class Post {
    * Returns the posts content
    * @return string
    */
-  public function getContents() {
+  public function getContent() {
     ob_start();
     \setup_postdata($this->post);
     \the_content();
@@ -129,8 +135,17 @@ class Post {
    * Returns post the post class
    * @return string
    */
-  public function getPostClasses() {
-    return 'class="' . join(' ', \get_post_class('', $this->post->ID))  . '"';
+  public function getPostClasses($classes = array()) {
+    $wpClasses = \get_post_class('', $this->post->ID);
+    return 'class="' . join(' ', array_merge($wpClasses, $classes, $this->classes))  . '"';
+  }
+
+  /**
+   * Returns whether the post has a thumbnail
+   * @return boolean
+   */
+  public function hasThumbnail() {
+    return \has_post_thumbnail($this->post->ID);
   }
 
   /**
@@ -213,6 +228,10 @@ class Post {
 
     return $this->popularPostsCache;
 
+  }
+
+  public function addClass($class) {
+    $this->classes[] = $class;
   }
 
   /******************* Author Functions *******************/
