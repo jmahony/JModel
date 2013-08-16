@@ -70,6 +70,7 @@ class User extends \WP_User {
    */
   public static function getCurrentUser() {
     global $current_user;
+    get_currentuserinfo();
     return new User($current_user->ID);
   }
 
