@@ -387,7 +387,7 @@ class Post {
       'posts_per_page' => -1
     ), $args);
 
-    $posts = get_posts();
+    $posts = get_posts($args);
 
     $ra = array();
 
